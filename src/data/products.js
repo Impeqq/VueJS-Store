@@ -1,47 +1,74 @@
 export const products = [
   {
+    id: 1,
+    categoryId: 2,
     name: "Смартфон POCO X3 6/128 Гб серый",
-    price: "21 990 ₽",
-    image: "item1.jpg"
+    price: "21990",
+    image: "item1.jpg",
+    colors: ["#ffbe15", "#73b6ea"]
   },
   {
+    id: 2,
+    categoryId: 2,
     name: "Смартфон Realme C3 RMX2020 3/64 ГБ красный",
-    price: "9 890 ₽",
-    image: "item2.png"
+    price: "9890",
+    image: "item2.png",
+    colors: ["#8be000"]
   },
   {
+    id: 3,
+    categoryId: 3,
     name: '15.6" Ноутбук Asus F540BA-GQ677 золотистый',
-    price: "34 490 ₽",
-    image: "item3.jpg"
+    price: "34490",
+    image: "item3.jpg",
+    colors: ["#73b6ea", "#222", "#8be000"]
   },
   {
+    id: 4,
+    categoryId: 1,
     name: 'Телевизор 55" Xiaomi Mi TV 4S черный',
-    price: "29 990 ₽",
-    image: "item4.jpg"
+    price: "29990",
+    image: "item4.jpg",
+    colors: ["#8be000"]
   },
   {
+    id: 5,
+    categoryId: 1,
     name: 'Телевизор 50" TCL L50P8US стальной',
-    price: "31 990 ₽",
-    image: "item5.jpg"
+    price: "31990",
+    image: "item5.jpg",
+    colors: ["#ffbe15"]
   },
   {
+    id: 6,
+    categoryId: 3,
     name: "Компьютер Зеон Игровой с SSD [319]",
-    price: "43 990 ₽",
-    image: "item6.jpg"
+    price: "43990",
+    image: "item6.jpg",
+    colors: ["#73b6ea", "#222", "#8be000"]
   },
   {
+    id: 7,
+    categoryId: 4,
     name: "Робот-пылесос Xiaomi Mi Robot Vacuum белый",
-    price: "17 990 ₽",
-    image: "item7.jpg"
+    price: "17990",
+    image: "item7.jpg",
+    colors: ["#ffbe15"]
   },
   {
+    id: 8,
+    categoryId: 4,
     name: "Беспроводная гарнитура Xiaomi Mi True Wireless",
-    price: "1 890 ₽",
-    image: "item8.jpg"
+    price: "1890",
+    image: "item8.jpg",
+    colors: ["#73b6ea", "#222"]
   },
   {
+    id: 9,
+    categoryId: 1,
     name: 'Телевизор 55" Hyundai H-LED55EU1301 черный',
-    price: "25 990 ₽",
-    image: "item9.jpg"
+    price: "25990",
+    image: "item9.jpg",
+    colors: ["#73b6ea", "#8be000"]
   }
 ];
