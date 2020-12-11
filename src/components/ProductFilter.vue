@@ -61,7 +61,7 @@
                 type="radio"
                 name="color"
                 v-model="currentColor"
-                :value="color.color"
+                :value="color.id"
               />
               <span
                 class="colors__value"

@@ -5,7 +5,7 @@ export const products = [
     name: "Смартфон POCO X3 6/128 Гб серый",
     price: "21990",
     image: "item1.jpg",
-    colors: ["#ffbe15", "#73b6ea"]
+    colors: [4, 3]
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export const products = [
     name: "Смартфон Realme C3 RMX2020 3/64 ГБ красный",
     price: "9890",
     image: "item2.png",
-    colors: ["#8be000"]
+    colors: [1]
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ export const products = [
     name: '15.6" Ноутбук Asus F540BA-GQ677 золотистый',
     price: "34490",
     image: "item3.jpg",
-    colors: ["#73b6ea", "#222", "#8be000"]
+    colors: [3, 2, 1]
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ export const products = [
     name: 'Телевизор 55" Xiaomi Mi TV 4S черный',
     price: "29990",
     image: "item4.jpg",
-    colors: ["#8be000"]
+    colors: [1]
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ export const products = [
     name: 'Телевизор 50" TCL L50P8US стальной',
     price: "31990",
     image: "item5.jpg",
-    colors: ["#ffbe15"]
+    colors: [4]
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ export const products = [
     name: "Компьютер Зеон Игровой с SSD [319]",
     price: "43990",
     image: "item6.jpg",
-    colors: ["#73b6ea", "#222", "#8be000"]
+    colors: [3, 2, 1]
   },
   {
     id: 7,
@@ -53,7 +53,7 @@ export const products = [
     name: "Робот-пылесос Xiaomi Mi Robot Vacuum белый",
     price: "17990",
     image: "item7.jpg",
-    colors: ["#ffbe15"]
+    colors: [4]
   },
   {
     id: 8,
@@ -61,7 +61,7 @@ export const products = [
     name: "Беспроводная гарнитура Xiaomi Mi True Wireless",
     price: "1890",
     image: "item8.jpg",
-    colors: ["#73b6ea", "#222"]
+    colors: [3, 2]
   },
   {
     id: 9,
@@ -69,6 +69,6 @@ export const products = [
     name: 'Телевизор 55" Hyundai H-LED55EU1301 черный',
     price: "25990",
     image: "item9.jpg",
-    colors: ["#73b6ea", "#8be000"]
+    colors: [3, 1]
   }
 ];
