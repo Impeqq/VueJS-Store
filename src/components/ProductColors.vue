@@ -1,6 +1,10 @@
 <template>
   <ul class="colors" :class="{ 'colors--black': isProduct }">
-    <li class="colors__item" v-for="color in arrayOfColors" :key="color.id">
+    <li
+      class="colors__item"
+      v-for="color in arrayOfColors"
+      :key="color.id || color"
+    >
       <label class="colors__label">
         <input
           class="colors__radio sr-only"
