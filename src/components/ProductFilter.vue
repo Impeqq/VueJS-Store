@@ -53,24 +53,11 @@
 
       <fieldset class="form__block">
         <legend class="form__legend">Цвет</legend>
-        <ul class="colors">
-          <li class="colors__item" v-for="color in colors" :key="color.id">
-            <label class="colors__label">
-              <input
-                class="colors__radio sr-only"
-                type="radio"
-                name="color"
-                v-model="currentColor"
-                :value="color.id"
-              />
-              <span
-                class="colors__value"
-                :style="`background-color: ${color.color}`"
-              >
-              </span>
-            </label>
-          </li>
-        </ul>
+        <ProductColors
+          :arrayOfColors="colors"
+          :currentColor.sync="currentColor"
+          :isProduct="false"
+        />
       </fieldset>
 
       <fieldset class="form__block">
@@ -181,6 +168,7 @@
 <script>
 import categories from "../data/categories";
 import colors from "../data/colors";
+import ProductColors from "./ProductColors";
 
 export default {
   name: "ProductFilter",
@@ -192,6 +180,9 @@ export default {
       currentCategoryId: 0,
       currentColor: 0,
     };
+  },
+  components: {
+    ProductColors,
   },
   computed: {
     categories() {

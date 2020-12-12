@@ -7,26 +7,27 @@
       <a href="#"> {{ product.name }} </a>
     </h3>
     <span class="catalog__price"> {{ product.price }} ₽ </span>
-    <ProductItemColors
-      :itemColors="product.colors"
-      :currentColor="currentColor"
+    <ProductColors
+      :arrayOfColors="product.colors"
+      :currentColor.sync="currentColor"
+      :isProduct="true"
     />
   </li>
 </template>
 
 <script>
 import colors from "../data/colors";
-import ProductItemColors from "./ProductItemColors";
+import ProductColors from "./ProductColors";
 
 export default {
   name: "ProductItem",
   props: ["product"],
   components: {
-    ProductItemColors,
+    ProductColors,
   },
   data() {
     return {
-      currentColor: 3,
+      currentColor: 0,
       colors,
     };
   },
