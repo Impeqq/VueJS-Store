@@ -8,9 +8,9 @@
     </h3>
     <span class="catalog__price"> {{ product.price }} ₽ </span>
     <ProductColors
-      :arrayOfColors="product.colors"
+      class="colors--black"
+      :arrayOfColors="productColors"
       :currentColor.sync="currentColor"
-      :isProduct="true"
     />
   </li>
 </template>
@@ -30,6 +30,11 @@ export default {
       currentColor: 0,
       colors,
     };
+  },
+  computed: {
+    productColors() {
+      return this.product.colors.map((c) => colors.find((i) => i.id === c));
+    },
   },
 };
 </script>

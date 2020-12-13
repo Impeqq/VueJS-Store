@@ -1,26 +1,14 @@
 <template>
-  <ul class="colors" :class="{ 'colors--black': isProduct }">
-    <li
-      class="colors__item"
-      v-for="color in arrayOfColors"
-      :key="color.id || color"
-    >
+  <ul class="colors">
+    <li class="colors__item" v-for="color in arrayOfColors" :key="color.id">
       <label class="colors__label">
         <input
           class="colors__radio sr-only"
           type="radio"
-          :value="color.id || color"
+          :value="color.id"
           v-model="computedColor"
-          :checked="
-            (computedColor == color.id || computedColor == color) && 'checked'
-          "
         />
-        <span
-          class="colors__value"
-          :style="`background-color: ${
-            color.color || colors.filter((item) => item.id === color)[0].color
-          }`"
-        >
+        <span class="colors__value" :style="`background-color: ${color.color}`">
         </span>
       </label>
     </li>
@@ -31,7 +19,7 @@
 import colors from "../data/colors";
 export default {
   name: "ProductColors",
-  props: ["arrayOfColors", "currentColor", "isProduct"],
+  props: ["arrayOfColors", "currentColor"],
   data() {
     return {
       colors,

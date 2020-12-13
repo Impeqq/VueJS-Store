@@ -56,7 +56,6 @@
         <ProductColors
           :arrayOfColors="colors"
           :currentColor.sync="currentColor"
-          :isProduct="false"
         />
       </fieldset>
 
