@@ -1,12 +1,17 @@
 <template>
   <li class="catalog__item">
-    <a class="catalog__pic" href="#">
+    <a
+      class="catalog__pic"
+      @click.prevent="gotoPage('product', { id: product.id })"
+    >
       <img :src="`img/${product.image}`" :alt="product.name" />
     </a>
     <h3 class="catalog__title">
-      <a href="#"> {{ product.name }} </a>
+      <a @click.prevent="gotoPage('product', { id: product.id })">
+        {{ product.name }}
+      </a>
     </h3>
-    <span class="catalog__price"> {{ product.price }} ₽ </span>
+    <span class="catalog__price"> {{ product.price | numberFormat }} ₽ </span>
     <ProductColors
       class="colors--black"
       :arrayOfColors="productColors"
@@ -19,6 +24,9 @@
 import colors from "../data/colors";
 import ProductColors from "./ProductColors";
 
+import gotoPage from "@/helpers/gotoPage";
+import numberFormat from "@/helpers/numberFormat";
+
 export default {
   name: "ProductItem",
   props: ["product"],
@@ -30,6 +38,12 @@ export default {
       currentColor: 0,
       colors,
     };
+  },
+  filters: {
+    numberFormat,
+  },
+  methods: {
+    gotoPage,
   },
   computed: {
     productColors() {
