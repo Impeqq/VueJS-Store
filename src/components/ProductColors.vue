@@ -17,6 +17,7 @@
 
 <script>
 import colors from "../data/colors";
+
 export default {
   name: "ProductColors",
   props: ["arrayOfColors", "currentColor"],
