@@ -2,7 +2,7 @@
   <li class="cart__item product">
     <div class="product__pic">
       <img
-        :src="`/img/${item.product.image}`"
+        :src="`${item.product.image}`"
         :alt="item.product.name"
         width="120"
         height="120"
@@ -26,7 +26,7 @@
       class="product__del button-del"
       type="button"
       aria-label="Удалить товар из корзины"
-      @click.prevent="deleteProduct(item.product.id)"
+      @click.prevent="deleteCartProduct(item.product.id)"
     >
       <svg width="20" height="20" fill="currentColor">
         <use xlink:href="#icon-close"></use>
@@ -38,7 +38,7 @@
 <script>
 import numberFormat from "../helpers/numberFormat";
 import BaseInputSpinner from "@/components/BaseInputSpinner";
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   filters: {
@@ -53,10 +53,9 @@ export default {
       get() {
         return this.item.amount;
       },
-
       set(value) {
         if (value >= 0) {
-          this.$store.commit("updateCartProductAmount", {
+          this.$store.dispatch("updateCartProductAmount", {
             productId: this.item.productId,
             amount: value,
           });
@@ -65,9 +64,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({
-      deleteProduct: "deleteCartProduct",
-    }),
+    ...mapActions(["deleteCartProduct"]),
   },
 };
 </script>

@@ -4,27 +4,27 @@
       class="catalog__pic"
       :to="{ name: 'product', params: { id: product.id } }"
     >
-      <img :src="`/img/${product.image}`" :alt="product.name" />
+      <img :src="product.image" :alt="product.title" />
     </router-link>
     <h3 class="catalog__title">
-      <a @click.prevent="gotoPage('product', { id: product.id })">
-        {{ product.name }}
-      </a>
+      <router-link :to="{ name: 'product', params: { id: product.id } }">
+        {{ product.title }}
+      </router-link>
     </h3>
-    <span class="catalog__price"> {{ product.price | numberFormat }} ₽ </span>
+    <span class="catalog__price" v-if="+product.price">
+      {{ product.price | numberFormat }} ₽
+    </span>
     <ProductColors
       class="colors--black"
-      :arrayOfColors="productColors"
+      :arrayOfColors="product.colors"
       :currentColor.sync="currentColor"
     />
   </li>
 </template>
 
 <script>
-import colors from "../data/colors";
 import ProductColors from "./ProductColors";
 
-import gotoPage from "@/helpers/gotoPage";
 import numberFormat from "@/helpers/numberFormat";
 
 export default {
@@ -36,14 +36,10 @@ export default {
   data() {
     return {
       currentColor: 0,
-      colors,
     };
   },
   filters: {
     numberFormat,
-  },
-  methods: {
-    gotoPage,
   },
   computed: {
     productColors() {

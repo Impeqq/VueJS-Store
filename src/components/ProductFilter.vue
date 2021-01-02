@@ -165,9 +165,10 @@
 </template>
 
 <script>
-import categories from "../data/categories";
-import colors from "../data/colors";
+import axios from "axios";
+
 import ProductColors from "./ProductColors";
+import { API_BASE_URL } from "@/config";
 
 export default {
   name: "ProductFilter",
@@ -178,6 +179,10 @@ export default {
       currentPriceTo: 0,
       currentCategoryId: 0,
       currentColor: 0,
+
+      categoriesData: null,
+
+      colorsData: null,
     };
   },
   components: {
@@ -185,10 +190,10 @@ export default {
   },
   computed: {
     categories() {
-      return categories;
+      return this.categoriesData && this.categoriesData.items;
     },
     colors() {
-      return colors;
+      return this.colorsData && this.colorsData.items;
     },
   },
   watch: {
@@ -201,7 +206,7 @@ export default {
     categoryId(value) {
       this.currentCategoryId = value;
     },
-    color(value) {
+    currentColor(value) {
       this.currentColor = value;
     },
   },
@@ -209,15 +214,29 @@ export default {
     submit() {
       this.$emit("update:priceFrom", this.currentPriceFrom);
       this.$emit("update:priceTo", this.currentPriceTo);
-      this.$emit("update:CategoryId", this.currentCategoryId);
+      this.$emit("update:categoryId", this.currentCategoryId);
       this.$emit("update:color", this.currentColor);
     },
     reset() {
       this.$emit("update:priceFrom", 0);
       this.$emit("update:priceTo", 0);
-      this.$emit("update:CategoryId", 0);
+      this.$emit("update:categoryId", 0);
       this.$emit("update:color", 0);
     },
+    loadCategories() {
+      axios
+        .get(`${API_BASE_URL}/api/productCategories`)
+        .then((response) => (this.categoriesData = response.data));
+    },
+    loadColors() {
+      axios
+        .get(`${API_BASE_URL}/api/colors`)
+        .then((response) => (this.colorsData = response.data));
+    },
+  },
+  created() {
+    this.loadColors();
+    this.loadCategories();
   },
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
-  <main class="content container">
+  <BaseLoader v-if="!products" />
+  <main class="content container" v-else>
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -49,6 +50,7 @@
 import numberFormat from "../helpers/numberFormat";
 import { mapGetters } from "vuex";
 import CartItem from "@/components/CartItem";
+import BaseLoader from "@/components/BaseLoader";
 
 export default {
   filters: {
@@ -56,6 +58,7 @@ export default {
   },
   components: {
     CartItem,
+    BaseLoader,
   },
   computed: {
     ...mapGetters({

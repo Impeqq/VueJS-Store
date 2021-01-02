@@ -8,7 +8,7 @@
           :value="color.id"
           v-model="computedColor"
         />
-        <span class="colors__value" :style="`background-color: ${color.color}`">
+        <span class="colors__value" :style="`background-color: ${color.code}`">
         </span>
       </label>
     </li>
@@ -16,16 +16,9 @@
 </template>
 
 <script>
-import colors from "../data/colors";
-
 export default {
   name: "ProductColors",
   props: ["arrayOfColors", "currentColor"],
-  data() {
-    return {
-      colors,
-    };
-  },
   computed: {
     computedColor: {
       get() {

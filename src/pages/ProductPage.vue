@@ -1,5 +1,11 @@
 <template>
-  <main class="content container">
+  <main class="content container" v-if="productLoading">
+    Загрузка товара...
+  </main>
+  <main class="content container" v-else-if="!productData">
+    Не удалось загрузить товар
+  </main>
+  <main class="content container" v-else>
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -13,7 +19,7 @@
           </router-link>
         </li>
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link"> {{ product.name }} </a>
+          <a class="breadcrumbs__link"> {{ product.title }} </a>
         </li>
       </ul>
     </div>
@@ -24,15 +30,15 @@
           <img
             width="570"
             height="570"
-            :src="`/img/${product.image}`"
-            :alt="product.name"
+            :src="product.image.file.url"
+            :alt="product.title"
           />
         </div>
       </div>
 
       <div class="item__info">
         <span class="item__code">Артикул: {{ product.id }}</span>
-        <h2 class="item__title">{{ product.name }}</h2>
+        <h2 class="item__title">{{ product.title }}</h2>
         <div class="item__form">
           <form
             class="form"
@@ -41,106 +47,28 @@
             @submit.prevent="addToCart"
           >
             <b class="item__price"> {{ product.price | numberFormat }} ₽ </b>
-
             <fieldset class="form__block">
               <legend class="form__legend">Цвет:</legend>
-              <ul class="colors">
-                <li class="colors__item">
-                  <label class="colors__label">
-                    <input
-                      class="colors__radio sr-only"
-                      type="radio"
-                      name="color-item"
-                      value="blue"
-                      checked=""
-                    />
-                    <span
-                      class="colors__value"
-                      style="background-color: #73b6ea"
-                    >
-                    </span>
-                  </label>
-                </li>
-                <li class="colors__item">
-                  <label class="colors__label">
-                    <input
-                      class="colors__radio sr-only"
-                      type="radio"
-                      name="color-item"
-                      value="yellow"
-                    />
-                    <span
-                      class="colors__value"
-                      style="background-color: #ffbe15"
-                    >
-                    </span>
-                  </label>
-                </li>
-                <li class="colors__item">
-                  <label class="colors__label">
-                    <input
-                      class="colors__radio sr-only"
-                      type="radio"
-                      name="color-item"
-                      value="gray" />
-                    <span
-                      class="colors__value"
-                      style="background-color: #939393"
-                    >
-                    </span
-                  ></label>
-                </li>
-              </ul>
-            </fieldset>
-
-            <fieldset class="form__block">
-              <legend class="form__legend">Объемб в ГБ:</legend>
-
-              <ul class="sizes sizes--primery">
-                <li class="sizes__item">
-                  <label class="sizes__label">
-                    <input
-                      class="sizes__radio sr-only"
-                      type="radio"
-                      name="sizes-item"
-                      value="32"
-                    />
-                    <span class="sizes__value"> 32gb </span>
-                  </label>
-                </li>
-                <li class="sizes__item">
-                  <label class="sizes__label">
-                    <input
-                      class="sizes__radio sr-only"
-                      type="radio"
-                      name="sizes-item"
-                      value="64"
-                    />
-                    <span class="sizes__value"> 64gb </span>
-                  </label>
-                </li>
-                <li class="sizes__item">
-                  <label class="sizes__label">
-                    <input
-                      class="sizes__radio sr-only"
-                      type="radio"
-                      name="sizes-item"
-                      value="128"
-                      checked=""
-                    />
-                    <span class="sizes__value"> 128gb </span>
-                  </label>
-                </li>
-              </ul>
+              <ProductColors
+                :arrayOfColors="product.colors"
+                :currentColor.sync="currentColor"
+              />
             </fieldset>
 
             <div class="item__row">
               <BaseInputSpinner class="form__counter" :amount.sync="amount" />
 
-              <button class="button button--primery" type="submit">
+              <button
+                class="button button--primery"
+                type="submit"
+                :disabled="productAddSending"
+              >
                 В корзину
               </button>
             </div>
+
+            <div v-show="productAdded">Товар добавлен в корзину</div>
+            <div v-show="productAddSending">Добавляем товар в корзину...</div>
           </form>
         </div>
       </div>
@@ -208,30 +136,59 @@
 </template>
 
 <script>
-import { products } from "@/data/products";
-import categories from "@/data/categories";
+import axios from "axios";
 
-import gotoPage from "@/helpers/gotoPage";
+import { API_BASE_URL } from "@/config";
+
 import numberFormat from "@/helpers/numberFormat";
 
 import BaseInputSpinner from "@/components/BaseInputSpinner";
+import ProductColors from "@/components/ProductColors";
+
+import { mapActions } from "vuex";
 
 export default {
   data() {
     return {
       productAmount: 1,
       productId: this.$route.params.id,
+
+      productData: null,
+
+      productLoading: false,
+      productLoadingFailed: false,
+
+      productAdded: false,
+      productAddSending: false,
+
+      currentColor: 0,
     };
   },
   components: {
     BaseInputSpinner,
+    ProductColors,
   },
   methods: {
-    gotoPage,
+    ...mapActions(["addProductToCart"]),
+    loadProduct() {
+      this.productLoading = true;
+      this.productLoading = false;
+
+      axios
+        .get(`${API_BASE_URL}/api/products/${this.$route.params.id}`)
+        .then((response) => (this.productData = response.data))
+        .catch(() => (this.productLoadingFailed = true))
+        .then(() => (this.productLoading = false));
+    },
     addToCart() {
-      this.$store.commit("addProductToCart", {
+      this.productAdded = false;
+      this.productAddSending = true;
+      this.addProductToCart({
         productId: this.product.id,
         amount: this.productAmount,
+      }).then(() => {
+        this.productAdded = true;
+        this.productAddSending = false;
       });
     },
   },
@@ -251,12 +208,18 @@ export default {
       },
     },
     product() {
-      return products.find((product) => product.id === +this.$route.params.id);
+      return this.productData && this.productData;
     },
     category() {
-      return categories.find(
-        (category) => category.id === this.product.categoryId
-      );
+      return this.productData && this.productData.category;
+    },
+  },
+  watch: {
+    "$route.params.id": {
+      handler() {
+        this.loadProduct();
+      },
+      immediate: true,
     },
   },
 };
