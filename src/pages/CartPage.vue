@@ -20,6 +20,9 @@
     <section class="cart">
       <form class="cart__form form" action="#" method="POST">
         <div class="cart__field">
+          <span class="cart__alert empty" v-if="!totalAmount"
+            >В вашей корзине нету товаров</span
+          >
           <ul class="cart__list">
             <CartItem
               v-for="item in products"
@@ -47,12 +50,14 @@
 </template>
 
 <script>
-import numberFormat from "../helpers/numberFormat";
 import { mapGetters } from "vuex";
+
 import CartItem from "@/components/CartItem";
 import BaseLoader from "@/components/BaseLoader";
+import numberFormat from "@/helpers/numberFormat";
 
 export default {
+  name: "CartPage",
   filters: {
     numberFormat,
   },
@@ -71,4 +76,10 @@ export default {
 </script>
 
 <style>
+.cart__alert.empty {
+  font-size: 25px;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
 </style>

@@ -50,7 +50,6 @@
           </select>
         </label>
       </fieldset>
-
       <fieldset class="form__block">
         <legend class="form__legend">Цвет</legend>
         <ProductColors
@@ -206,7 +205,7 @@ export default {
     categoryId(value) {
       this.currentCategoryId = value;
     },
-    currentColor(value) {
+    color(value) {
       this.currentColor = value;
     },
   },

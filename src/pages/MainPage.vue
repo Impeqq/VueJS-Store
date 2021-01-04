@@ -2,7 +2,9 @@
   <main class="content container">
     <div class="content__top content__top--catalog">
       <h1 class="content__title">Каталог</h1>
-      <span class="content__info"> 152 товара </span>
+      <span class="content__info">
+        кол-во товаров - {{ countProducts || 0 }}
+      </span>
     </div>
     <div class="content__catalog">
       <ProductFilter
@@ -18,8 +20,12 @@
           Произошла ошибка при загрузке товаров
           <button @click.prevent="loadProducts()">Попробовать еще раз</button>
         </div>
+        <span class="catalog__alert empty" v-if="productsFiltredEmpty"
+          >Нет соответствующих товаров</span
+        >
         <ProductList :products="products" />
         <BasePagination
+          v-if="paginatable"
           v-model="page"
           :count="countProducts"
           :per-page="productsPerPage"
@@ -39,6 +45,7 @@ import BaseLoader from "@/components/BaseLoader.vue";
 import { API_BASE_URL } from "@/config";
 
 export default {
+  name: "MainPage",
   components: {
     ProductList,
     BasePagination,
@@ -58,9 +65,17 @@ export default {
       productData: null,
       productsLoading: false,
       productsLoadingFailed: false,
+      productsFiltredEmpty: false,
     };
   },
   computed: {
+    paginatable() {
+      return (
+        !this.productsLoading &&
+        !this.productsLoadingFailed &&
+        !this.productsFiltredEmpty
+      );
+    },
     products() {
       return (
         this.productData &&
@@ -81,6 +96,7 @@ export default {
       this.productData = null;
       this.productsLoading = true;
       this.productsLoadingFailed = false;
+      this.productsFiltredEmpty = false;
       clearTimeout(this.loadProductsTimer);
       this.loadProductsTimer = setTimeout(() => {
         axios
@@ -94,7 +110,13 @@ export default {
               colorId: this.filterColor,
             },
           })
-          .then((response) => (this.productData = response.data))
+          .then((response) => {
+            if (response.data.items.length) {
+              this.productData = response.data;
+            } else {
+              this.productsFiltredEmpty = true;
+            }
+          })
           .catch(() => (this.productsLoadingFailed = true))
           .then(() => (this.productsLoading = false));
       }, 1000);
@@ -122,3 +144,13 @@ export default {
   },
 };
 </script>;
+
+
+<style>
+.catalog__alert.empty {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 25px;
+  text-align: center;
+}
+</style>

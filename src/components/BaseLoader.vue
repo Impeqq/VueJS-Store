@@ -8,16 +8,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: "BaseLoader",
+};
 </script>
 
 <style>
-:root {
-  --yellow: #feb60a;
-  --red: #ff0062;
-  --blue: #00dbf9;
-  --violet: #da00f7;
-}
 div.loader {
   display: flex;
   justify-content: center;

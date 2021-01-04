@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  name: "BaseInputSpinner",
   props: ["amount", "productId"],
   computed: {
     computedAmount: {

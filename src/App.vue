@@ -2,16 +2,18 @@
   <div>
     <header class="header">
       <div class="header__wrapper container">
-        <span class="header__info">Каталог</span>
+        <router-link class="header__info" :to="{ name: 'main' }"
+          >Каталог</router-link
+        >
 
-        <a class="header__logo" href="#">
+        <router-link class="header__logo" :to="{ name: 'main' }">
           <img
             src="/img/svg/logo-tech.svg"
             alt="Логотип интернет магазина Технозавррр"
             width="190"
             height="33"
           />
-        </a>
+        </router-link>
         <a class="header__tel" href="tel:8 800 600 90 09"> 8 800 600 90 09 </a>
         <CartIndicator></CartIndicator>
       </div>
@@ -23,7 +25,10 @@
       <div class="footer__wrapper container">
         <ul class="footer__links">
           <li>
-            <a class="footer__link" href="#"> Каталог </a>
+            <router-link class="footer__link" :to="{ name: 'main' }"
+              >Каталог</router-link
+            >
+            >
           </li>
           <li>
             <a class="footer__link" href="tel:88006009009"> 8 800 600 90 09 </a>
@@ -119,9 +124,11 @@
 </template>
 
 <script>
-import CartIndicator from "@/components/CartIndicator";
 import { mapActions } from "vuex";
 import { mapMutations } from "vuex";
+
+import CartIndicator from "@/components/CartIndicator";
+
 export default {
   components: { CartIndicator },
   created() {
@@ -136,7 +143,13 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style>
+:root {
+  --yellow: #feb60a;
+  --red: #ff0062;
+  --blue: #00dbf9;
+  --violet: #da00f7;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

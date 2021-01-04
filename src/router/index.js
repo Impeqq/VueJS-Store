@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import MainPage from "@/pages/MainPage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import ProductPage from "@/pages/ProductPage";

@@ -137,17 +137,15 @@
 
 <script>
 import axios from "axios";
-
-import { API_BASE_URL } from "@/config";
-
-import numberFormat from "@/helpers/numberFormat";
+import { mapActions } from "vuex";
 
 import BaseInputSpinner from "@/components/BaseInputSpinner";
 import ProductColors from "@/components/ProductColors";
-
-import { mapActions } from "vuex";
+import { API_BASE_URL } from "@/config";
+import numberFormat from "@/helpers/numberFormat";
 
 export default {
+  name: "ProductPage",
   data() {
     return {
       productAmount: 1,

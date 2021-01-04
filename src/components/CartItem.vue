@@ -41,6 +41,7 @@ import BaseInputSpinner from "@/components/BaseInputSpinner";
 import { mapActions } from "vuex";
 
 export default {
+  name: "CartItem",
   filters: {
     numberFormat,
   },

@@ -24,7 +24,6 @@
 
 <script>
 import ProductColors from "./ProductColors";
-
 import numberFormat from "@/helpers/numberFormat";
 
 export default {
