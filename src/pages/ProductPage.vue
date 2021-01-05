@@ -67,8 +67,12 @@
               </button>
             </div>
 
-            <div v-show="productAdded">Товар добавлен в корзину</div>
-            <div v-show="productAddSending">Добавляем товар в корзину...</div>
+            <div class="item__alert" v-show="productAdded">
+              Товар добавлен в корзину
+            </div>
+            <div class="item__alert" v-show="productAddSending">
+              Добавляем товар в корзину...
+            </div>
           </form>
         </div>
       </div>
@@ -222,3 +226,10 @@ export default {
   },
 };
 </script>
+
+<style>
+.item__alert {
+  font-size: 18px;
+  margin-top: 20px;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="screen">
     <header class="header">
       <div class="header__wrapper container">
         <router-link class="header__info" :to="{ name: 'main' }"
@@ -157,5 +157,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 </style>

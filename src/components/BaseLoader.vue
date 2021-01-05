@@ -19,12 +19,13 @@ div.loader {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  margin-top: 28px;
 }
 div.loader > div {
-  width: 3vw;
-  height: 3vw;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
-  margin: 2vw;
+  margin: 10px;
   background-image: linear-gradient(
     145deg,
     rgba(255, 255, 255, 0.5) 0%,
