@@ -1,5 +1,12 @@
 <template>
-  <main class="content container" v-if="orderInfo">
+  <main class="content container" v-if="!orderInfo">
+    <div class="content__alert error">
+      Заявки с таким номером не существует, либо произошла ошибка сервера.
+      <br />
+      <router-link :to="{ name: 'main' }">Вернуться на главную</router-link>
+    </div>
+  </main>
+  <main class="content container" v-else>
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
@@ -104,3 +111,22 @@ export default {
   },
 };
 </script>
+
+<style>
+.content__alert {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.content__alert a {
+  margin-top: 15px;
+  display: inline-block;
+  color: #9eff00;
+  background: #222;
+  padding: 10px;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+</style>
