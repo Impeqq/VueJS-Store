@@ -2,7 +2,6 @@
   <BaseFormField :title="title" :error="error">
     <textarea
       class="form__input form__input--area"
-      name="comments"
       :placeholder="placeholder"
       v-model="dataValue"
     ></textarea>
@@ -12,6 +11,7 @@
 <script>
 import formFieldMixin from "@/mixins/formFieldMixin";
 export default {
+  name: "BaseFormTextarea",
   mixins: [formFieldMixin],
 };
 </script>

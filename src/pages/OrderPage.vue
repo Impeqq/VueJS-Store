@@ -42,12 +42,13 @@
               v-model="formData.address"
               :error="formError.address"
             />
-            <BaseFormText
+            <BaseFormTextMasked
               title="Телефон"
               type="tel"
               placeholder="Введите ваш телефон"
               v-model="formData.phone"
               :error="formError.phone"
+              mask="\+\7 (111) 111-1111"
             />
             <BaseFormText
               title="Email"
@@ -65,35 +66,9 @@
           </div>
 
           <div class="cart__options">
-            <h3 class="cart__title">Доставка</h3>
-            <ul class="cart__options options">
-              <li class="options__item">
-                <label class="options__label">
-                  <input
-                    class="options__radio sr-only"
-                    type="radio"
-                    name="delivery"
-                    value="0"
-                    checked=""
-                  />
-                  <span class="options__value">
-                    Самовывоз <b>бесплатно</b>
-                  </span>
-                </label>
-              </li>
-              <li class="options__item">
-                <label class="options__label">
-                  <input
-                    class="options__radio sr-only"
-                    type="radio"
-                    name="delivery"
-                    value="500"
-                  />
-                  <span class="options__value"> Курьером <b>500 ₽</b> </span>
-                </label>
-              </li>
-            </ul>
-
+            <OrderDelivery
+              :currentDeliveryMethod.sync="currentDeliveryMethod"
+            />
             <h3 class="cart__title">Оплата</h3>
             <ul class="cart__options options">
               <li class="options__item">
@@ -126,7 +101,9 @@
           <OrderList :products="products" />
 
           <div class="cart__total">
-            <p>Доставка: <b>500 ₽</b></p>
+            <p>
+              Доставка: <b>{{ currentDeliveryMethod | numberFormat }} ₽</b>
+            </p>
             <p>
               Итого: <b>{{ totalAmount }}</b> товара на сумму
               <b>{{ totalPrice | numberFormat }} ₽</b>
@@ -158,8 +135,10 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 
 import BaseFormText from "@/components/BaseFormText";
+import BaseFormTextMasked from "@/components/BaseFormTextMasked";
 import BaseFormTextarea from "@/components/BaseFormTextarea";
 import OrderList from "@/components/OrderList";
+import OrderDelivery from "@/components/OrderDelivery";
 import BaseLoader from "@/components/BaseLoader.vue";
 import { API_BASE_URL } from "@/config";
 import numberFormat from "@/helpers/numberFormat";
@@ -169,6 +148,7 @@ export default {
   data() {
     return {
       formData: {},
+      currentDeliveryMethod: 500,
       formError: {},
       formErrorMessage: "",
       orderLoading: false,
@@ -176,9 +156,11 @@ export default {
   },
   components: {
     BaseFormText,
+    BaseFormTextMasked,
     BaseFormTextarea,
     OrderList,
     BaseLoader,
+    OrderDelivery,
   },
   filters: {
     numberFormat,
