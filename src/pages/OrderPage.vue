@@ -67,7 +67,7 @@
 
           <div class="cart__options">
             <OrderDelivery
-              :currentDeliveryMethod.sync="currentDeliveryMethod"
+              :currentDeliveryMethodPrice.sync="currentDeliveryMethodPrice"
             />
             <h3 class="cart__title">Оплата</h3>
             <ul class="cart__options options">
@@ -102,7 +102,7 @@
 
           <div class="cart__total">
             <p>
-              Доставка: <b>{{ currentDeliveryMethod | numberFormat }} ₽</b>
+              Доставка: <b>{{ currentDeliveryMethodPrice | numberFormat }} ₽</b>
             </p>
             <p>
               Итого: <b>{{ totalAmount }}</b> товара на сумму
@@ -148,7 +148,7 @@ export default {
   data() {
     return {
       formData: {},
-      currentDeliveryMethod: 500,
+      currentDeliveryMethodPrice: 500,
       formError: {},
       formErrorMessage: "",
       orderLoading: false,

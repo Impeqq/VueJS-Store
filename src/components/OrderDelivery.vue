@@ -22,7 +22,7 @@ import deliveryMethods from "@/data/deliveryMethods";
 
 export default {
   name: "OrderDelivery",
-  props: ["currentDeliveryMethod"],
+  props: ["currentDeliveryMethodPrice"],
   data() {
     return {
       methods: deliveryMethods,
@@ -31,11 +31,11 @@ export default {
   computed: {
     computedDeliveryMethod: {
       get() {
-        return this.currentDeliveryMethod;
+        return this.currentDeliveryMethodPrice;
       },
 
       set(value) {
-        this.$emit("update:currentDeliveryMethod", value);
+        this.$emit("update:currentDeliveryMethodPrice", value);
       },
     },
   },
