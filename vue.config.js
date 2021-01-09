@@ -1,3 +1,3 @@
 module.exports = {
-  publicPath: "/vue-skillbox-build/"
+  publicPath: "/skillbox-vue-build/"
 };
