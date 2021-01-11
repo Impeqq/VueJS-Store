@@ -2,5 +2,5 @@
 
 ## DEMO
 ```
-<a href="https://impeqq.github.io/skillbox-vue/#/">impeqq.github.io/skillbox-vue</a>
+[impeqq.github.io/skillbox-vue](https://impeqq.github.io/skillbox-vue/#/)
 ```
