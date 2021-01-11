@@ -8,7 +8,7 @@
 
         <router-link class="header__logo" :to="{ name: 'main' }">
           <img
-            src="/img/svg/logo-tech.svg"
+            src="@/assets/img/svg/logo-tech.svg"
             alt="Логотип интернет магазина Технозавррр"
             width="190"
             height="33"
