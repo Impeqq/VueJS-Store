@@ -1,4 +1,4 @@
 # Impeqq shop
 
 ## DEMO
-[impeqq.github.io/skillbox-vue](https://impeqq.github.io/skillbox-vue/#/)
+[impeqq.github.io/VueJS-Store](https://impeqq.github.io/VueJS-Store/#/)
